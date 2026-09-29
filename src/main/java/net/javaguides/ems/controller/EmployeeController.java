@@ -1,6 +1,7 @@
 package net.javaguides.ems.controller;
 
 import java.net.URI;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import net.javaguides.ems.dto.EmployeeDto;
 import net.javaguides.ems.service.EmployeeService;
@@ -42,6 +43,13 @@ public class EmployeeController {
         final EmployeeDto employeeDto = this.employeeService.getEmployeeById(id);
 
         return ResponseEntity.status(HttpStatus.OK).body(employeeDto);
+    }
+
+    @GetMapping
+    ResponseEntity<List<EmployeeDto>> getAllEmployees() {
+        final List<EmployeeDto> employees = this.employeeService.getAllEmployees();
+
+        return ResponseEntity.status(HttpStatus.OK).body(employees);
     }
 
 }

@@ -1,5 +1,6 @@
 package net.javaguides.ems.service.impl;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import net.javaguides.ems.dto.EmployeeDto;
 import net.javaguides.ems.entity.Employee;
@@ -40,6 +41,14 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id: " + employeeId));
 
         return EmployeeMapper.toDto(employee);
+    }
+
+    @Override
+    public List<EmployeeDto> getAllEmployees() {
+
+        final List<Employee> employees = this.employeeRepository.findAll();
+
+        return employees.stream().map(EmployeeMapper::toDto).toList();
     }
 
 }
