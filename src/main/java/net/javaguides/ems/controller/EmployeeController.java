@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,6 +51,14 @@ public class EmployeeController {
         final List<EmployeeDto> employees = this.employeeService.getAllEmployees();
 
         return ResponseEntity.status(HttpStatus.OK).body(employees);
+    }
+
+    @PutMapping("/{id}")
+    ResponseEntity<EmployeeDto> updateEmployee(@PathVariable final Long id,
+                                               @RequestBody final EmployeeDto employeeDto) {
+        final EmployeeDto updatedEmployee = this.employeeService.updateEmployee(id, employeeDto);
+
+        return ResponseEntity.status(HttpStatus.OK).body(updatedEmployee);
     }
 
 }
